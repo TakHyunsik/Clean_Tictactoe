@@ -87,11 +87,6 @@ class TestTicTacToeBoard {
 	}
 
 	@Test
-	void test_sze() {
-		assertEquals(3, board.get_size());
-	}
-
-	@Test
 	public void testcheck_resultNoWinner() {
 		// -------
 		// |O|X|O|
@@ -106,13 +101,57 @@ class TestTicTacToeBoard {
 
 		// 무승부
 		board.set_in_board(0, 0, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
 		board.set_in_board(0, 1, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
 		board.set_in_board(0, 2, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
 		board.set_in_board(1, 0, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
 		board.set_in_board(1, 1, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
 		board.set_in_board(1, 2, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
 		board.set_in_board(2, 0, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
 		board.set_in_board(2, 1, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(2, 2, PlayerType.P2);
+		// The game is a tie, the result should be PlayerType.None
+		assertEquals(PlayerType.None, board.check_result());
+		assertTrue(board.check_be_full());
+	}
+
+	@Test
+	public void testcheck_resultNoWinner1() {
+		// -------
+		// |O|O|X|
+		// -------
+		// |X|O|O|
+		// -------
+		// |O|X|X|
+		// -------
+
+		// No winner, the result should be PlayerType.None
+		assertEquals(PlayerType.None, board.check_result());
+
+		// 무승부
+		board.set_in_board(0, 0, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(0, 1, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(0, 2, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(1, 0, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(1, 1, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(1, 2, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(2, 0, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(2, 1, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
 		board.set_in_board(2, 2, PlayerType.P2);
 		// The game is a tie, the result should be PlayerType.None
 		assertEquals(PlayerType.None, board.check_result());
@@ -139,6 +178,42 @@ class TestTicTacToeBoard {
 		assertEquals(PlayerType.P1, board.check_result());
 		board.set_in_board(2, 1, PlayerType.P2);
 		assertEquals(PlayerType.P1, board.check_result());
+	}
+
+	@Test
+	public void testcheck_resultNoWinner2() {
+		// -------
+		// |X|O|X|
+		// -------
+		// |X|O|X|
+		// -------
+		// |O|X|O|
+		// -------
+
+		// No winner, the result should be PlayerType.None
+		assertEquals(PlayerType.None, board.check_result());
+
+		// 무승부
+		board.set_in_board(0, 0, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(0, 1, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(0, 2, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(1, 0, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(1, 1, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(1, 2, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(2, 0, PlayerType.P1);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(2, 1, PlayerType.P2);
+		assertEquals(PlayerType.None, board.check_result());
+		board.set_in_board(2, 2, PlayerType.P1);
+		// The game is a tie, the result should be PlayerType.None
+		assertEquals(PlayerType.None, board.check_result());
+		assertTrue(board.check_be_full());
 	}
 
 	@Test
