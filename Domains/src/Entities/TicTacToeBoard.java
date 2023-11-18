@@ -7,8 +7,17 @@ import Interfaces.ISquareBoard;
 import Interfaces.IEndCheckableBoard;
 
 public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoard, IEndCheckableBoard {
-   private PlayerType[][] Board = new PlayerType[3][3];
- 
+   private PlayerType[][] Board;
+
+   public TicTacToeBoard() {
+      Board = new PlayerType[this.get_size()][this.get_size()];
+      for (int i = 0; i < this.get_size(); i++) {
+         for (int j = 0; j < this.get_size(); j++) {
+            Board[i][j] = PlayerType.None;
+         }
+      }
+   }
+
    @Override
    public PlayerType get_in_board(int y, int x) {
       // TODO Auto-generated method stub
@@ -23,24 +32,28 @@ public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoa
 
    @Override
    public boolean set_in_board(int y, int x, PlayerType player) {
-      // TODO Auto-generated method stub
-      Board[y][x] = player;
-      return true;
+      // 둘수 있는지 체크하고 둔다.
+      if (check_setable_in_board(y, x)) {
+         Board[y][x] = player;
+         return true;
+      }
+      return false;
    }
 
    @Override
    public boolean check_setable_in_board(int y, int x) {
       // TODO Auto-generated method stub
-      //이미 둔 곳
-      //size를 넘은 곳
-      if(y < 0 || y >= 3 || x < 0 || x >= 3) {
+      // size를 넘은 곳
+      if (y < 0 || y >= get_size() || x < 0 || x >= get_size()) {
          return false;
       }
-      if(Board[y][x] != PlayerType.None) {
+      // 이미 둔 곳
+      if (Board[y][x] != PlayerType.None) {
          return false;
       }
-      return false;
-      
+      // 전부 성공
+      return true;
+
    }
 
    @Override
