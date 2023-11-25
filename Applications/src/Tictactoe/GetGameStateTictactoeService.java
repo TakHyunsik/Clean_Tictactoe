@@ -1,6 +1,6 @@
 package Tictactoe;
 
-import AppInterfaces.IDistinctEndGameService;
+import AppInterfaces.BoardServices.IDistinctEndGameService;
 import Commons.PlayerType;
 import DomainInterfaces.IGameBoard;
 import Repository.IBoardRepository;

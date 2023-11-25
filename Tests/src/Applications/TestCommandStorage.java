@@ -3,7 +3,7 @@ package Applications;
 import java.util.Optional;
 import java.util.Stack;
 
-import AppInterfaces.ICommand;
+import AppInterfaces.CommandService.ICommand;
 import Repository.ICommandRepository;
 
 public class TestCommandStorage implements ICommandRepository {

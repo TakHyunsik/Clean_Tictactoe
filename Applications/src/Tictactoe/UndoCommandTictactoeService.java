@@ -1,6 +1,6 @@
 package Tictactoe;
 
-import AppInterfaces.IUndoCommandService;
+import AppInterfaces.CommandService.IUndoCommandService;
 import Repository.ICommandRepository;
 
 public class UndoCommandTictactoeService implements IUndoCommandService {

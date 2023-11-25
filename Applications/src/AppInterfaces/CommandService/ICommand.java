@@ -1,4 +1,4 @@
-package AppInterfaces;
+package AppInterfaces.CommandService;
 
 public interface ICommand {
 	/**

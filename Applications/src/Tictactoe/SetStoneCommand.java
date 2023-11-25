@@ -1,7 +1,7 @@
 package Tictactoe;
 
-import AppInterfaces.ICheckSetableRuleService;
-import AppInterfaces.ICommand;
+import AppInterfaces.BoardServices.ICheckSetableRuleService;
+import AppInterfaces.CommandService.ICommand;
 import Commons.PlayerType;
 import Repository.IBoardRepository;
 
@@ -13,7 +13,6 @@ public class SetStoneCommand implements ICommand {
 	boolean result;
 
 	public SetStoneCommand(int y, int x, PlayerType type, IBoardRepository repo) {
-		System.out.println(y + " " + x + " " + type);
 		_y = y;
 		_x = x;
 		_type = type;

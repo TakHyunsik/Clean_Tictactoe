@@ -1,6 +1,6 @@
 package Applications;
 
-import AppInterfaces.IUndoCommandService;
+import AppInterfaces.CommandService.IUndoCommandService;
 import Repository.ICommandRepository;
 
 public class TestUndoCommand implements IUndoCommandService {

@@ -1,8 +1,8 @@
 package Applications;
 
-import AppInterfaces.IDistinctEndGameService;
-import AppInterfaces.IGetBoardService;
-import AppInterfaces.IProcessCommandService;
+import AppInterfaces.BoardServices.IDistinctEndGameService;
+import AppInterfaces.BoardServices.IGetBoardService;
+import AppInterfaces.CommandService.IProcessCommandService;
 import Commons.PlayerType;
 import Entities.TicTacToeBoard;
 import Repository.IBoardRepository;

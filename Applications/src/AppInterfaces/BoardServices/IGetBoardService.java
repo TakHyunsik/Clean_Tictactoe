@@ -1,4 +1,4 @@
-package AppInterfaces;
+package AppInterfaces.BoardServices;
 
 import Commons.PlayerType;
 

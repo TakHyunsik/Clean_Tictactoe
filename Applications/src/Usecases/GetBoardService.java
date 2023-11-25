@@ -1,6 +1,6 @@
 package Usecases;
 
-import AppInterfaces.IGetBoardService;
+import AppInterfaces.BoardServices.IGetBoardService;
 import Commons.PlayerType;
 import DomainInterfaces.IGameBoard;
 import Repository.IBoardRepository;

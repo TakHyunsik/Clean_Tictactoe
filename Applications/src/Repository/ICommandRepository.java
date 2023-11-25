@@ -2,7 +2,7 @@ package Repository;
 
 import java.util.Optional;
 
-import AppInterfaces.ICommand;
+import AppInterfaces.CommandService.ICommand;
 
 public interface ICommandRepository {
 	/**

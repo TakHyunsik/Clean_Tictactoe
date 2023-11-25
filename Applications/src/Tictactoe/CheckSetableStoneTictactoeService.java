@@ -1,6 +1,6 @@
 package Tictactoe;
 
-import AppInterfaces.ICheckSetableRuleService;
+import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import Commons.PlayerType;
 import Repository.IBoardRepository;
 

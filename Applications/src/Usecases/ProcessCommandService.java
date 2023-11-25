@@ -1,7 +1,7 @@
 package Usecases;
 
-import AppInterfaces.ICommand;
-import AppInterfaces.IProcessCommandService;
+import AppInterfaces.CommandService.ICommand;
+import AppInterfaces.CommandService.IProcessCommandService;
 import Repository.ICommandRepository;
 
 public class ProcessCommandService implements IProcessCommandService {
