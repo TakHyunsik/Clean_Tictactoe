@@ -1,4 +1,4 @@
-package Interfaces;
+package DomainInterfaces;
 
 import Commons.PlayerType;
 

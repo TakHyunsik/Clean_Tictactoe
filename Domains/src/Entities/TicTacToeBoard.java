@@ -1,10 +1,10 @@
 package Entities;
 
 import Commons.PlayerType;
-import Interfaces.IDistinctBoard;
-import Interfaces.ISetableBoard;
-import Interfaces.ISquareBoard;
-import Interfaces.IEndCheckableBoard;
+import DomainInterfaces.IDistinctBoard;
+import DomainInterfaces.IEndCheckableBoard;
+import DomainInterfaces.ISetableBoard;
+import DomainInterfaces.ISquareBoard;
 
 public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoard, IEndCheckableBoard {
 	private PlayerType[][] Board;

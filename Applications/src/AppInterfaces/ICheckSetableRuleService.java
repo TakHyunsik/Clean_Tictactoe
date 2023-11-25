@@ -1,4 +1,4 @@
-package Interfaces;
+package AppInterfaces;
 
 import Commons.PlayerType;
 
