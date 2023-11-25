@@ -1,5 +1,5 @@
 package Interfaces;
 
-public interface ISetCommandOnBoard {
+public interface ISetCommandService {
 	public void execute(ICommand cmd);
 }

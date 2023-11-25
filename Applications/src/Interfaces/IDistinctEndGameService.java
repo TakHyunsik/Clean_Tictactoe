@@ -2,6 +2,6 @@ package Interfaces;
 
 import Commons.ResultMessage;
 
-public interface IDistinctEndGame {
+public interface IDistinctEndGameService {
 	public ResultMessage check_end();
 }

@@ -1,5 +1,5 @@
 package Interfaces;
 
-public interface IUndoCommandOnBoard {
+public interface IUndoCommandService {
 	public boolean undo();
 }
