@@ -1,5 +1,5 @@
 package DomainInterfaces;
 
-public interface IGameBoard extends IGetableBoard, IGetableStateBoard, ISetableBoard, ISquareBoard {
+public interface IGameBoard extends IGetableBoard, IGetableStateBoard, ISetableBoard, ISquareBoard, ICopyBoard {
 
 }
