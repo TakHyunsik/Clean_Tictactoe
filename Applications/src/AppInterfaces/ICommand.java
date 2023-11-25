@@ -1,4 +1,4 @@
-package Interfaces;
+package AppInterfaces;
 
 public interface ICommand {
 	public void execute();

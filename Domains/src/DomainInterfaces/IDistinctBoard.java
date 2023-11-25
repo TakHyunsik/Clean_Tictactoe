@@ -1,4 +1,4 @@
-package Interfaces;
+package DomainInterfaces;
 
 public interface IDistinctBoard extends IGetableBoard {
 	
