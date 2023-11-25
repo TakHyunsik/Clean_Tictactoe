@@ -1,12 +1,9 @@
 package Entities;
 
 import Commons.PlayerType;
-import DomainInterfaces.IDistinctBoard;
-import DomainInterfaces.IEndCheckableBoard;
-import DomainInterfaces.ISetableBoard;
-import DomainInterfaces.ISquareBoard;
+import DomainInterfaces.IGameBoard;
 
-public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoard, IEndCheckableBoard {
+public class TicTacToeBoard implements IGameBoard{
    private PlayerType[][] Board;
 
    public TicTacToeBoard() {
@@ -40,7 +37,6 @@ public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoa
       return false;
    }
 
-   @Override
    public boolean check_setable_in_board(int y, int x) {
       // TODO Auto-generated method stub
       // size를 넘은 곳
@@ -53,13 +49,6 @@ public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoa
       }
       // 전부 성공
       return true;
-
-   }
-
-   @Override
-   public PlayerType check_result() {
-      // TODO Auto-generated method stub
-      return PlayerType.None;
    }
 
    @Override
@@ -73,5 +62,10 @@ public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoa
       // TODO Auto-generated method stub
       return false;
    }
+
+	@Override
+	public boolean check_already_set_in_board(int y, int x) {
+		return this.get_in_board(y, x) != PlayerType.None;
+	}
 
 }
