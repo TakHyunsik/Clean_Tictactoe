@@ -1,12 +1,9 @@
 package Entities;
 
 import Commons.PlayerType;
-import DomainInterfaces.IDistinctBoard;
-import DomainInterfaces.IEndCheckableBoard;
-import DomainInterfaces.ISetableBoard;
-import DomainInterfaces.ISquareBoard;
+import DomainInterfaces.IGameBoard;
 
-public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoard, IEndCheckableBoard {
+public class TicTacToeBoard implements IGameBoard {
 	private PlayerType[][] Board;
 
 	public TicTacToeBoard() {
@@ -16,6 +13,10 @@ public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoa
 				Board[i][j] = PlayerType.None;
 			}
 		}
+	}
+
+	public TicTacToeBoard(PlayerType[][] board) {
+		this.Board = board;
 	}
 
 	@Override
@@ -53,73 +54,70 @@ public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoa
 		}
 		// 전부 성공
 		return true;
+	}
 
+	public PlayerType check_result() {
+		if (Board[0][0] == PlayerType.P1 && Board[0][1] == PlayerType.P1 && Board[0][2] == PlayerType.P1) {
+			return PlayerType.P1;
+		} else if (Board[1][0] == PlayerType.P1 && Board[1][1] == PlayerType.P1 && Board[1][2] == PlayerType.P1) {
+			return PlayerType.P1;
+		} else if (Board[2][0] == PlayerType.P1 && Board[2][1] == PlayerType.P1 && Board[2][2] == PlayerType.P1) {
+			return PlayerType.P1;
+		}
+
+		else if (Board[0][0] == PlayerType.P1 && Board[1][0] == PlayerType.P1 && Board[2][0] == PlayerType.P1) {
+			return PlayerType.P1;
+		} else if (Board[0][1] == PlayerType.P1 && Board[1][1] == PlayerType.P1 && Board[2][1] == PlayerType.P1) {
+			return PlayerType.P1;
+		} else if (Board[0][2] == PlayerType.P1 && Board[1][2] == PlayerType.P1 && Board[2][2] == PlayerType.P1) {
+			return PlayerType.P1;
+		}
+
+		else if (Board[0][0] == PlayerType.P1 && Board[1][1] == PlayerType.P1 && Board[2][2] == PlayerType.P1) {
+			return PlayerType.P1;
+		} else if (Board[0][2] == PlayerType.P1 && Board[1][1] == PlayerType.P1 && Board[2][0] == PlayerType.P1) {
+			return PlayerType.P1;
+		}
+		if (Board[0][0] == PlayerType.P2 && Board[0][1] == PlayerType.P2 && Board[0][2] == PlayerType.P2) {
+			return PlayerType.P2;
+		} else if (Board[1][0] == PlayerType.P2 && Board[1][1] == PlayerType.P2 && Board[1][2] == PlayerType.P2) {
+			return PlayerType.P2;
+		} else if (Board[2][0] == PlayerType.P2 && Board[2][1] == PlayerType.P2 && Board[2][2] == PlayerType.P2) {
+			return PlayerType.P2;
+		}
+
+		else if (Board[0][0] == PlayerType.P2 && Board[1][0] == PlayerType.P2 && Board[2][0] == PlayerType.P2) {
+			return PlayerType.P2;
+		} else if (Board[0][1] == PlayerType.P2 && Board[1][1] == PlayerType.P2 && Board[2][1] == PlayerType.P2) {
+			return PlayerType.P2;
+		} else if (Board[0][2] == PlayerType.P2 && Board[1][2] == PlayerType.P2 && Board[2][2] == PlayerType.P2) {
+			return PlayerType.P2;
+		}
+
+		else if (Board[0][0] == PlayerType.P2 && Board[1][1] == PlayerType.P2 && Board[2][2] == PlayerType.P2) {
+			return PlayerType.P2;
+		} else if (Board[0][2] == PlayerType.P2 && Board[1][1] == PlayerType.P2 && Board[2][0] == PlayerType.P2) {
+			return PlayerType.P2;
+		}
+		// 비김
+		if (this.check_be_full()) {
+			return PlayerType.None;
+		}
+		return PlayerType.None;
 	}
 
 	@Override
-	public PlayerType check_result() {if(Board[0][0]==PlayerType.P1 && Board[0][1]==PlayerType.P1 && Board[0][2]==PlayerType.P1) {
-		return PlayerType.P1;
+	public int get_count() {
+		int cnt = 0;
+		for (int u = 0; u < get_size(); u++) {
+			for (int y = 0; y < get_size(); y++) {
+				if (Board[u][y] != PlayerType.None) {
+					cnt++;
+				}
+			}
+		}
+		return cnt;
 	}
-	else if(Board[1][0]==PlayerType.P1 && Board[1][1]==PlayerType.P1 && Board[1][2]==PlayerType.P1) {
-		return PlayerType.P1;
-	}
-	else if(Board[2][0]==PlayerType.P1 && Board[2][1]==PlayerType.P1 && Board[2][2]==PlayerType.P1) {
-		return PlayerType.P1;
-	}
-	
-	
-	else if(Board[0][0]==PlayerType.P1 && Board[1][0]==PlayerType.P1 && Board[2][0]==PlayerType.P1) {
-		return PlayerType.P1;
-	}
-	else if(Board[0][1]==PlayerType.P1 && Board[1][1]==PlayerType.P1 && Board[2][1]==PlayerType.P1) {
-		return PlayerType.P1;
-	}
-	else if(Board[0][2]==PlayerType.P1 && Board[1][2]==PlayerType.P1 && Board[2][2]==PlayerType.P1) {
-		return PlayerType.P1;
-	}
-	
-
-	
-	else if(Board[0][0]==PlayerType.P1 && Board[1][1]==PlayerType.P1 && Board[2][2]==PlayerType.P1) {
-		return PlayerType.P1;
-	}
-	else if(Board[0][2]==PlayerType.P1 && Board[1][1]==PlayerType.P1 && Board[2][0]==PlayerType.P1) {
-		return PlayerType.P1;
-	}
-	if(Board[0][0]==PlayerType.P2 && Board[0][1]==PlayerType.P2 && Board[0][2]==PlayerType.P2) {
-		return PlayerType.P2;
-	}
-	else if(Board[1][0]==PlayerType.P2 && Board[1][1]==PlayerType.P2 && Board[1][2]==PlayerType.P2) {
-		return PlayerType.P2;
-	}
-	else if(Board[2][0]==PlayerType.P2 && Board[2][1]==PlayerType.P2 && Board[2][2]==PlayerType.P2) {
-		return PlayerType.P2;
-	}
-	
-	else if(Board[0][0]==PlayerType.P2 && Board[1][0]==PlayerType.P2 && Board[2][0]==PlayerType.P2) {
-		return PlayerType.P2;
-	}
-	else if(Board[0][1]==PlayerType.P2 && Board[1][1]==PlayerType.P2 && Board[2][1]==PlayerType.P2) {
-		return PlayerType.P2;
-	}
-	else if(Board[0][2]==PlayerType.P2 && Board[1][2]==PlayerType.P2 && Board[2][2]==PlayerType.P2) {
-		return PlayerType.P2;
-	}
-	
-	
-	else if(Board[0][0]==PlayerType.P2 && Board[1][1]==PlayerType.P2 && Board[2][2]==PlayerType.P2) {
-		return PlayerType.P2;
-	}
-	else if(Board[0][2]==PlayerType.P2 && Board[1][1]==PlayerType.P2 && Board[2][0]==PlayerType.P2) {
-		return PlayerType.P2;
-	}
-	//비김
-	if(this.check_be_full()) {
-		return PlayerType.None;
-	}
-	return PlayerType.None;
-}
-	
 
 	@Override
 	public boolean check_empty() {
@@ -135,7 +133,6 @@ public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoa
 		return true;
 	}
 
-
 	@Override
 	public boolean check_be_full() {
 		// TODO Auto-generated method stub
@@ -150,4 +147,13 @@ public class TicTacToeBoard implements IDistinctBoard, ISetableBoard, ISquareBoa
 		return true;
 	}
 
+	@Override
+	public IGameBoard copy() {
+		PlayerType[][] new_board = new PlayerType[get_size()][get_size()];
+
+		for (int i = 0; i < get_size(); i++) {
+			new_board[i] = Board[i].clone();
+		}
+		return new TicTacToeBoard(new_board);
+	}
 }

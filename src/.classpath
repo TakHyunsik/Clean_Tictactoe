@@ -6,7 +6,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Domains"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Domains"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Applications"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
