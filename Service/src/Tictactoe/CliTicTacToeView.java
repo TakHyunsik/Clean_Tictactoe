@@ -168,7 +168,12 @@ public class CliTicTacToeView extends JFrame implements MouseListener {
 		}
 		
 		this.process_service.process(new SetStoneCommand2(ticArr,this.board_repo));
-		
+		PlayerType[][] board = this.get_board_service.get_all();
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				System.out.println(board[i][j]);
+			}
+		}
 		PlayerType result = distinct_service.get_winner();
 		System.out.println("result: " + result);
 		if(result == PlayerType.P1 || result == PlayerType.P2) {

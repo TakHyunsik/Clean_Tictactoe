@@ -19,11 +19,7 @@ public class TestBoardStorage implements IBoardRepository {
 
 	@Override
 	public void save_board(IGameBoard board) {
-		for (int i = 0; i < board.get_size(); i++) {
-			for (int j = 0; j < board.get_size(); j++) {
-				this.board.set_in_board(i, j, board.get_in_board(i, j));
-			}
-		}
+		this.board=board;
 	}
 
 	@Override
