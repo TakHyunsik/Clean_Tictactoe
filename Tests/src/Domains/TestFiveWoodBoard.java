@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import DomainInterfaces.IGameBoard;
 import Entities.FiveWoodBoard;
 
-class TestTicTacToeBoard {
+class TestFiveWoodBoard {
 	IGameBoard board;
 
 	@BeforeEach
