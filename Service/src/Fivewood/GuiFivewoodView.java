@@ -74,7 +74,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 
 		this.setWindow();
 		this.setVisible(true);
-		this.setActionOfNineRoom();
+		this.setActionOfAllRoom();
 		this.setActionOfStartNewGame();
 	}
 
