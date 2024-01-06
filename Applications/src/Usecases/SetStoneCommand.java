@@ -1,9 +1,10 @@
-package Tictactoe;
+package Usecases;
 
 import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.CommandService.ICommand;
 import Commons.PlayerType;
 import Repository.IBoardRepository;
+import Tictactoe.CheckSetableStoneTictactoeService;
 
 public class SetStoneCommand implements ICommand {
 	int _y, _x;

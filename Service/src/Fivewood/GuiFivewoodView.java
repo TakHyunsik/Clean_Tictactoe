@@ -1,4 +1,4 @@
-package Tictactoe;
+package Fivewood;
 
 import javax.swing.*;
 
@@ -14,9 +14,10 @@ import Repository.IBoardRepository;
 import Repository.ICommandRepository;
 import Usecases.GetBoardService;
 import Usecases.ProcessCommandService;
+import Usecases.SetStoneCommand;
 
 
-public class CliTicTacToeView extends JFrame implements MouseListener {
+public class GuiFivewoodView extends JFrame implements MouseListener {
 	IBoardRepository board_repo;
 	ICommandRepository cmd_repo;
 	IDistinctEndGameService distinct_service;
@@ -26,7 +27,7 @@ public class CliTicTacToeView extends JFrame implements MouseListener {
 	
 
 	private static final long serialVersionUID = 1L;
-	private static final int SIZE = 3;
+	private int SIZE;
 
 	JLabel title = new JLabel("TicTacToe | ");
 	JLabel dispCurrentPlayer = new JLabel("Player 0");
@@ -36,29 +37,34 @@ public class CliTicTacToeView extends JFrame implements MouseListener {
 	JButton startNewGame = new JButton("새 게임 시작");
 
 	JPanel titleBar = new JPanel();
-	JPanel nineRoom = new JPanel();
+	JPanel AllRoom = new JPanel();
 
 	private int START_PLAYER = 1;
 	 
 	private boolean isGameEnd = false;
 
-	public CliTicTacToeView() {
+	public GuiFivewoodView() {
 		super("TicTacToe");
 		this.resetGame(1);
 		
-		board_repo = new TestBoardStorage(new TicTacToeBoard());
-		cmd_repo = new TestCommandStorage(null);
-		distinct_service = new GetGameStateTictactoeService(board_repo);
+		//오류 고치기
+		board_repo = new FivewoodBoardStorage(new TicTacToeBoard());
+		cmd_repo = new FivewoodCommandStorage(null);
+		//distinct_service = new GetGameStateTictactoeService(board_repo);
 		process_service = new ProcessCommandService(cmd_repo);
 		get_board_service = new GetBoardService(board_repo);
 		
-		this.setSize(400,300);
+		SIZE = board_repo.get_size();
+		
+		//화면 사이즈 적당하게 조절하기
+		
+		this.setSize(700,500);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		this.setWindow();
 		this.setVisible(true);
-		this.setActionOfNineRoom();
+		//this.setActionOfNineRoom();
 		this.setActionOfStartNewGame();
 	}
 
@@ -71,33 +77,30 @@ public class CliTicTacToeView extends JFrame implements MouseListener {
 		dispCurrentPlayer.setText("Player " + START_PLAYER);
 		add(titleBar, BorderLayout.NORTH);
 
-		nineRoom.setLayout(new GridLayout(SIZE,SIZE));
+		AllRoom.setLayout(new GridLayout(SIZE,SIZE));
 		for(int i = 0; i < SIZE*SIZE; i++) {
+			// 화면 크기 조정하기
 			JButton tempButton = new JButton("");
 			tempButton.setFont(new Font("Impact", Font.PLAIN, 22));
-			nineRoom.add(tempButton);
+			AllRoom.add(tempButton);
 
 		}
 
-		add(nineRoom, BorderLayout.CENTER);
+		add(AllRoom, BorderLayout.CENTER);
 
 	}
 
 	public void setActionOfStartNewGame() {
-		// 9개의 버튼에 ox를 없앤다. 
 		startNewGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 //				ttt.resetGame(START_PLAYER);
 				isGameEnd = false;
-				for(int i = 0; i < nineRoom.getComponents().length; i++) {
-					((JButton)nineRoom.getComponent(i)).setText("");
-				}
-
+				// 오목판에 맞게 수정 
 			}
 		});
 	}
-	public void setActionOfNineRoom() {
+	public void setActionOfAllRoom() {
 		for(Component c : nineRoom.getComponents()) {
 			c.addMouseListener(this);
 		}
@@ -157,18 +160,14 @@ public class CliTicTacToeView extends JFrame implements MouseListener {
 		changeTurn();
 		
 		System.out.println("(" + e.getX() + ", " + e.getY() + ") ");
-
-		int[][] ticArr = new int[SIZE][SIZE];
-		for(int i = 0; i < ticArr.length; i++) {
-			for(int j = 0; j < ticArr[i].length; j++) {
-				String pl = ((JButton)nineRoom.getComponent(j + i * SIZE)).getText();
-				if(pl.equals("O"))   ticArr[i][j] = 1;
-				else if(pl.equals("X"))   ticArr[i][j] = 2;
-				else   ticArr[i][j] = 0;
-			}               
-		}
+		// SetStoneCommand와 process_service를 사용해서 착수 구현할수 있도록 y, x, PlayerType 알아내기
 		
-		this.process_service.process(new SetStoneCommand2(ticArr,this.board_repo));
+		// y,x,type 채우기
+		int y,x;
+		PlayerType type;
+
+		//여기까지 알아내기
+		this.process_service.process(new SetStoneCommand(y, x, type, this.board_repo));
 		PlayerType[][] board = this.get_board_service.get_all();
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
