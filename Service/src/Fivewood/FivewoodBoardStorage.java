@@ -10,8 +10,8 @@ public class FivewoodBoardStorage implements IBoardRepository {
 
 	IGameBoard board;
 
-	public FivewoodBoardStorage(TicTacToeBoard ticTacToeBoard) {
-		this.board = ticTacToeBoard;
+	public FivewoodBoardStorage(FivewoodBoard FivewoodBoard) {
+		this.board = FivewoodBoard;
 	}
 
 	@Override

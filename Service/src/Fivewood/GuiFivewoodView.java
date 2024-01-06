@@ -9,7 +9,7 @@ import AppInterfaces.CommandService.IProcessCommandService;
 import java.awt.*;
 import java.awt.event.*;
 import Commons.PlayerType;
-import Entities.TicTacToeBoard;
+import Entities.FivewoodBoard;
 import Repository.IBoardRepository;
 import Repository.ICommandRepository;
 import Usecases.GetBoardService;
@@ -29,7 +29,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	private int SIZE;
 
-	JLabel title = new JLabel("TicTacToe | ");
+	JLabel title = new JLabel("Fivewood | ");
 	JLabel dispCurrentPlayer = new JLabel("Player 0");
 	private int score1 = 0;
 	private int score2 = 0;
@@ -44,13 +44,13 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 	private boolean isGameEnd = false;
 
 	public GuiFivewoodView() {
-		super("TicTacToe");
+		super("Fivewood");
 		this.resetGame(1);
 		
 		//오류 고치기
-		board_repo = new FivewoodBoardStorage(new TicTacToeBoard());
+		board_repo = new FivewoodBoardStorage(new FivewoodBoard());
 		cmd_repo = new FivewoodCommandStorage(null);
-		//distinct_service = new GetGameStateTictactoeService(board_repo);
+		distinct_service = new GetGameStateFivewoodService(board_repo);
 		process_service = new ProcessCommandService(cmd_repo);
 		get_board_service = new GetBoardService(board_repo);
 		
@@ -58,13 +58,13 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		
 		//화면 사이즈 적당하게 조절하기
 		
-		this.setSize(700,500);
+		this.setSize(800,800);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		this.setWindow();
 		this.setVisible(true);
-		//this.setActionOfNineRoom();
+		this.setActionOfAllRoom();
 		this.setActionOfStartNewGame();
 	}
 
@@ -80,7 +80,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		AllRoom.setLayout(new GridLayout(SIZE,SIZE));
 		for(int i = 0; i < SIZE*SIZE; i++) {
 			// 화면 크기 조정하기
-			JButton tempButton = new JButton("");
+			BoardButton tempButton = new BoardButton(i, i, "");
 			tempButton.setFont(new Font("Impact", Font.PLAIN, 22));
 			AllRoom.add(tempButton);
 
@@ -97,11 +97,14 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 //				ttt.resetGame(START_PLAYER);
 				isGameEnd = false;
 				// 오목판에 맞게 수정 
+				for(int i = 0; i < AllRoom.getComponents().length; i++) {
+					((BoardButton)AllRoom.getComponent(i)).setText("");
+				}
 			}
 		});
 	}
 	public void setActionOfAllRoom() {
-		for(Component c : nineRoom.getComponents()) {
+		for(Component c : AllRoom.getComponents()) {
 			c.addMouseListener(this);
 		}
 	}
@@ -141,12 +144,13 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		JButton tempButton = (JButton)e.getComponent();
+		System.out.println("123");
+		BoardButton tempButton = (BoardButton)e.getComponent();
 		if(isGameEnd) {
 			return;
 		}
 		if(tempButton.getText().equals("O") || tempButton.getText().equals("X")) {
-			JOptionPane.showMessageDialog(nineRoom, "이미 둔 곳입니다.");
+			JOptionPane.showMessageDialog(AllRoom, "이미 둔 곳입니다.");
 			return;
 		}
 		else if(getCurrentPlayerNum() == 1) {
@@ -163,8 +167,10 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		// SetStoneCommand와 process_service를 사용해서 착수 구현할수 있도록 y, x, PlayerType 알아내기
 		
 		// y,x,type 채우기
-		int y,x;
-		PlayerType type;
+		int y = tempButton.y;
+		int x = tempButton.x;
+		PlayerType type = PlayerType.P1;
+		
 
 		//여기까지 알아내기
 		this.process_service.process(new SetStoneCommand(y, x, type, this.board_repo));
@@ -177,7 +183,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		PlayerType result = distinct_service.get_winner();
 		System.out.println("result: " + result);
 		if(result == PlayerType.P1 || result == PlayerType.P2) {
-			JOptionPane.showMessageDialog(nineRoom, "플레이어 " + result + "의 승리입니다.");
+			JOptionPane.showMessageDialog(AllRoom, "플레이어 " + result + "의 승리입니다.");
 			if(result == PlayerType.P1) {
 				score1++;
 			} else {
@@ -186,7 +192,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 			scoreLabel.setText(" | " + score1 + " : " + score2);
 			isGameEnd = true;
 		} else if (result == PlayerType.None && distinct_service.check_end()) {
-			JOptionPane.showMessageDialog(nineRoom, "비겼습니다.");
+			JOptionPane.showMessageDialog(AllRoom, "비겼습니다.");
 			isGameEnd = true;
 		}
 

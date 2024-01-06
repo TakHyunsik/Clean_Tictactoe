@@ -28,7 +28,6 @@ public class SetStoneCommand2 implements ICommand {
 					board.set_in_board(i, j, PlayerType.None);
 				}
 			}
-			System.out.println();
 		}
 		
 		result = true;

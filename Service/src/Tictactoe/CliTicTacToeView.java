@@ -156,7 +156,7 @@ public class CliTicTacToeView extends JFrame implements MouseListener {
 		}
 		changeTurn();
 		
-		System.out.println("(" + e.getX() + ", " + e.getY() + ") ");
+//		System.out.println("(" + e.getX() + ", " + e.getY() + ") ");
 
 		int[][] ticArr = new int[SIZE][SIZE];
 		for(int i = 0; i < ticArr.length; i++) {
@@ -172,11 +172,11 @@ public class CliTicTacToeView extends JFrame implements MouseListener {
 		PlayerType[][] board = this.get_board_service.get_all();
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
-				System.out.println(board[i][j]);
+//				System.out.println(board[i][j]);
 			}
 		}
 		PlayerType result = distinct_service.get_winner();
-		System.out.println("result: " + result);
+//		System.out.println("result: " + result);
 		if(result == PlayerType.P1 || result == PlayerType.P2) {
 			JOptionPane.showMessageDialog(nineRoom, "플레이어 " + result + "의 승리입니다.");
 			if(result == PlayerType.P1) {
