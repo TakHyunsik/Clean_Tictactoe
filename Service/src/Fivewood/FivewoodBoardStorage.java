@@ -2,15 +2,16 @@ package Fivewood;
 
 import Commons.PlayerType;
 import DomainInterfaces.IGameBoard;
-import Entities.FiveWoodBoard;
+import Entities.FivewoodBoard;
+import Entities.TicTacToeBoard;
 import Repository.IBoardRepository;
 
 public class FivewoodBoardStorage implements IBoardRepository {
 
 	IGameBoard board;
 
-	public FivewoodBoardStorage(FiveWoodBoard board) {
-		this.board = board;
+	public FivewoodBoardStorage(FivewoodBoard FivewoodBoard) {
+		this.board = FivewoodBoard;
 	}
 
 	@Override
@@ -20,11 +21,7 @@ public class FivewoodBoardStorage implements IBoardRepository {
 
 	@Override
 	public void save_board(IGameBoard board) {
-		for (int i = 0; i < board.get_size(); i++) {
-			for (int j = 0; j < board.get_size(); j++) {
-				this.board.set_in_board(i, j, board.get_in_board(i, j));
-			}
-		}
+		this.board = board;
 	}
 
 	@Override

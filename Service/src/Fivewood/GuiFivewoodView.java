@@ -1,28 +1,17 @@
 package Fivewood;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import AppInterfaces.BoardServices.IDistinctEndGameService;
 import AppInterfaces.BoardServices.IGetBoardService;
 import AppInterfaces.CommandService.IProcessCommandService;
+
+import java.awt.*;
+import java.awt.event.*;
 import Commons.PlayerType;
-import Entities.TicTacToeBoard;
+import Entities.FivewoodBoard;
 import Repository.IBoardRepository;
 import Repository.ICommandRepository;
-import Tictactoe.GetGameStateTictactoeService;
 import Usecases.GetBoardService;
 import Usecases.ProcessCommandService;
 import Usecases.SetStoneCommand;
@@ -34,41 +23,39 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 	IProcessCommandService process_service;
 	IGetBoardService get_board_service;
 
-	// 1. Æ½ÅØÅä¶ó°í ÀûÇôÀÖ´Â °Í ÀüºÎ ¿À¸ñÀ¸·Î ¹Ù²Ù±â
-	// 2.
-
 	private static final long serialVersionUID = 1L;
 	private int SIZE;
 
-	JLabel title = new JLabel("TicTacToe | ");
+	JLabel title = new JLabel("Fivewood | ");
 	JLabel dispCurrentPlayer = new JLabel("Player 0");
 	private int score1 = 0;
 	private int score2 = 0;
 	JLabel scoreLabel = new JLabel(" | " + score1 + " : " + score2);
-	JButton startNewGame = new JButton("»õ °ÔÀÓ ½ÃÀÛ");
+	JButton startNewGame = new JButton("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 	JPanel titleBar = new JPanel();
-	JPanel allRoom = new JPanel();
+	JPanel AllRoom = new JPanel();
 
 	private int START_PLAYER = 1;
 
 	private boolean isGameEnd = false;
 
 	public GuiFivewoodView() {
-		super("TicTacToe");
+		super("Fivewood");
 		this.resetGame(1);
 
-		// ¿À·ù °íÃÄ¿À±â
-		board_repo = new FivewoodBoardStorage(new TicTacToeBoard());
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½
+		board_repo = new FivewoodBoardStorage(new FivewoodBoard());
 		cmd_repo = new FivewoodCommandStorage(null);
-		distinct_service = new GetGameStateTictactoeService(board_repo);
+		distinct_service = new GetGameStateFivewoodService(board_repo);
 		process_service = new ProcessCommandService(cmd_repo);
 		get_board_service = new GetBoardService(board_repo);
 
 		SIZE = board_repo.get_size();
 
-		// È­¸é »çÀÌÁî Àû´çÇÏ°Ô Á¶ÀýÇÏ±â
-		this.setSize(400, 300);
+		// È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+
+		this.setSize(800, 800);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -87,15 +74,16 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		dispCurrentPlayer.setText("Player " + START_PLAYER);
 		add(titleBar, BorderLayout.NORTH);
 
-		allRoom.setLayout(new GridLayout(SIZE, SIZE));
+		AllRoom.setLayout(new GridLayout(SIZE, SIZE));
 		for (int i = 0; i < SIZE * SIZE; i++) {
-			// È­¸é Å©±â Á¶Á¤ÇÏ±â
-			JButton tempButton = new JButton("");
+			// È­ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+			BoardButton tempButton = new BoardButton(i, i, "");
 			tempButton.setFont(new Font("Impact", Font.PLAIN, 22));
-			allRoom.add(tempButton);
+			AllRoom.add(tempButton);
+
 		}
 
-		add(allRoom, BorderLayout.CENTER);
+		add(AllRoom, BorderLayout.CENTER);
 
 	}
 
@@ -103,15 +91,18 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		startNewGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				ttt.resetGame(START_PLAYER);
+				// ttt.resetGame(START_PLAYER);
 				isGameEnd = false;
-				// ¿À¸ñÆÇ¿¡ ¸Â°Ô ¼öÁ¤ -
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½
+				for (int i = 0; i < AllRoom.getComponents().length; i++) {
+					((BoardButton) AllRoom.getComponent(i)).setText("");
+				}
 			}
 		});
 	}
 
 	public void setActionOfAllRoom() {
-		for (Component c : nineRoom.getComponents()) {
+		for (Component c : AllRoom.getComponents()) {
 			c.addMouseListener(this);
 		}
 	}
@@ -152,12 +143,13 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		JButton tempButton = (JButton) e.getComponent();
+		System.out.println("123");
+		BoardButton tempButton = (BoardButton) e.getComponent();
 		if (isGameEnd) {
 			return;
 		}
 		if (tempButton.getText().equals("O") || tempButton.getText().equals("X")) {
-			JOptionPane.showMessageDialog(allRoom, "ÀÌ¹Ì µÐ °÷ÀÔ´Ï´Ù.");
+			JOptionPane.showMessageDialog(AllRoom, "ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
 			return;
 		} else if (getCurrentPlayerNum() == 1) {
 			tempButton.setText("O");
@@ -169,19 +161,26 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		changeTurn();
 
 		System.out.println("(" + e.getX() + ", " + e.getY() + ") ");
+		// SetStoneCommandï¿½ï¿½ process_serviceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ ï¿½Öµï¿½ï¿½ï¿½ y, x,
+		// PlayerType ï¿½Ë¾Æ³ï¿½ï¿½ï¿½
 
-		// SetStoneCommand¿Í process_service¸¦ »ç¿ëÇØ¼­ Âø¼ö ±¸ÇöÇÒ¼ö ÀÖµµ·Ï y, x, PlayerType ¾Ë¾Æ³»±â
-		// y,x,type Ã¤¿ö¿À±â
-		int y, x;
-		PlayerType type;
+		// y,x,type Ã¤ï¿½ï¿½ï¿½
+		int y = tempButton.y;
+		int x = tempButton.x;
+		PlayerType type = PlayerType.P1;
 
-		// ¿©±â±îÁö ¾Ë¾Æ³»±â
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ï¿½ï¿½
 		this.process_service.process(new SetStoneCommand(y, x, type, this.board_repo));
-
+		PlayerType[][] board = this.get_board_service.get_all();
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				System.out.println(board[i][j]);
+			}
+		}
 		PlayerType result = distinct_service.get_winner();
 		System.out.println("result: " + result);
 		if (result == PlayerType.P1 || result == PlayerType.P2) {
-			JOptionPane.showMessageDialog(nineRoom, "ÇÃ·¹ÀÌ¾î " + result + "ÀÇ ½Â¸®ÀÔ´Ï´Ù.");
+			JOptionPane.showMessageDialog(AllRoom, "ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ " + result + "ï¿½ï¿½ ï¿½Â¸ï¿½ï¿½Ô´Ï´ï¿½.");
 			if (result == PlayerType.P1) {
 				score1++;
 			} else {
@@ -190,9 +189,10 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 			scoreLabel.setText(" | " + score1 + " : " + score2);
 			isGameEnd = true;
 		} else if (result == PlayerType.None && distinct_service.check_end()) {
-			JOptionPane.showMessageDialog(nineRoom, "ºñ°å½À´Ï´Ù.");
+			JOptionPane.showMessageDialog(AllRoom, "ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 			isGameEnd = true;
 		}
+
 	}
 
 	@Override
