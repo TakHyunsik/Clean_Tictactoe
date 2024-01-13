@@ -184,11 +184,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		// 여기까지 알아내기
 		this.process_service.process(new SetStoneCommand(y, x, type, check_service, this.board_repo));
 		PlayerType[][] board = this.get_board_service.get_all();
-//		for (int i = 0; i < SIZE; i++) {
-//			for (int j = 0; j < SIZE; j++) {
-//				// System.out.println(board[i][j]);
-//			}
-//		}
+
 		PlayerType result = distinct_service.get_winner();
 		if (result == PlayerType.P1 || result == PlayerType.P2) {
 			JOptionPane.showMessageDialog(AllRoom, "플레이어 " + result + " 의 승리입니다.");
