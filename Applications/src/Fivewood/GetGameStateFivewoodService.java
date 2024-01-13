@@ -29,9 +29,46 @@ public class GetGameStateFivewoodService implements IDistinctEndGameService {
 	// x y 축 하나씩 줄이기
 	public PlayerType get_winner() {
 		IGameBoard board = repo.load_board();
-		
-	
-	}
+		 int size = board.get_size();
+		 System.out.println("get_winner");
+		 for (int y = 0; y < size; y++) {
+		        for (int x = 0; x < size; x++) {
+		        	if(board.get_in_board(y, x)!=PlayerType.None) {
+		        		System.out.println("x,y,p "+" "+x+" "+y+" "+board.get_in_board(y, x));
+		        		PlayerType winner = 패턴_확인(y, x);
+			            if (winner != PlayerType.None) {
+			                return winner;
+			            }
+		        	}
+		        }
+		    }
+
+		    return PlayerType.None;
+		}
+
+		private PlayerType 패턴_확인(int y, int x) {
+		    PlayerType winner = get_가로(y, x);
+		    if (winner != PlayerType.None) {
+		        return winner;
+		    }
+
+		    winner = get_세로(y, x);
+		    if (winner != PlayerType.None) {
+		        return winner;
+		    }
+
+		    winner = get_오른쪽위대각선(y, x);
+		    if (winner != PlayerType.None) {
+		        return winner;
+		    }
+
+		    winner = get_왼쪽위대각선(y, x);
+		    if (winner != PlayerType.None) {
+		        return winner;
+		    }
+
+		    return PlayerType.None;
+		}
 
 	@Override
 	public boolean check_end() {
@@ -42,16 +79,15 @@ public class GetGameStateFivewoodService implements IDistinctEndGameService {
 		IGameBoard board = repo.load_board();
 		PlayerType type = board.get_in_board(y, x);
 		
-	//	if(board.get_in_board(y, x) == )
+		if(x >= board.get_size() - 4) {
+			return PlayerType.None;
+		}
 		for(int i = 1; i < 5; i++) {
 			//사이즈 제한 두기
 			if(board.get_in_board(y, x) == type && board.get_in_board(y, x + i) != type) {
 				return PlayerType.None;
 		
 			}
-
-
-			
 		}
 		
 		return type;
@@ -62,8 +98,12 @@ public class GetGameStateFivewoodService implements IDistinctEndGameService {
 		IGameBoard board = repo.load_board();
 		PlayerType type = board.get_in_board(y, x);
 		
+		if(y <= board.get_size() - 12) {
+			return PlayerType.None;
+		}
+		
 		for(int q = 1; q < 5; q++) {
-			if(board.get_in_board(y, x) == type && board.get_in_board(y + q, x) != type) {
+			if(board.get_in_board(y, x) == type && board.get_in_board(y - q, x) != type) {
 				return PlayerType.None;
 			}
 		}
@@ -72,6 +112,10 @@ public class GetGameStateFivewoodService implements IDistinctEndGameService {
 	public PlayerType get_오른쪽위대각선(int y, int x) {
 		IGameBoard board = repo.load_board();
 		PlayerType type = board.get_in_board(y, x);
+		
+		if(y <= board.get_size() - 12 || x >= board.get_size() - 4) {
+			return PlayerType.None;
+		}
 		
 		for(int w = 1; w < 5; w++) {
 			if(board.get_in_board(y, x) == type && board.get_in_board(y - w, x + w) != type) {
@@ -83,6 +127,10 @@ public class GetGameStateFivewoodService implements IDistinctEndGameService {
 	public PlayerType get_왼쪽위대각선(int y, int x) {
 		IGameBoard board = repo.load_board();
 		PlayerType type = board.get_in_board(y, x);
+		
+		if(y <= board.get_size() - 12 || x <= board.get_size() - 12) {
+			return PlayerType.None;
+		}
 		
 		for(int a = 1; a < 5; a++) {
 			if(board.get_in_board(y, x) == type && board.get_in_board(y - a, x - a) != type) {

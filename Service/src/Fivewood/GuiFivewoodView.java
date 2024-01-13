@@ -4,12 +4,14 @@ import javax.swing.*;
 
 import AppInterfaces.BoardServices.IDistinctEndGameService;
 import AppInterfaces.BoardServices.IGetBoardService;
+import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.CommandService.IProcessCommandService;
 
 import java.awt.*;
 import java.awt.event.*;
 import Commons.PlayerType;
 import Entities.FivewoodBoard;
+import Fivewood.CheckSetableStoneFivewoodService;
 import Repository.IBoardRepository;
 import Repository.ICommandRepository;
 import Usecases.GetBoardService;
@@ -22,6 +24,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 	ICommandRepository cmd_repo;
 	IDistinctEndGameService distinct_service;
 	IProcessCommandService process_service;
+	ICheckSetableRuleService check_service;
 	IGetBoardService get_board_service;
 
 	
@@ -51,6 +54,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		board_repo = new FivewoodBoardStorage(new FivewoodBoard());
 		cmd_repo = new FivewoodCommandStorage(null);
 		distinct_service = new GetGameStateFivewoodService(board_repo);
+		check_service = new CheckSetableStoneFivewoodService(board_repo);
 		process_service = new ProcessCommandService(cmd_repo);
 		get_board_service = new GetBoardService(board_repo);
 		
@@ -81,6 +85,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		for(int i = 0; i < SIZE*SIZE; i++) {
 			// 화면 크기 조정하기
 			BoardButton tempButton = new BoardButton(i, i, "");
+			
 			tempButton.setFont(new Font("Impact", Font.PLAIN, 22));
 			AllRoom.add(tempButton);
 
@@ -146,6 +151,8 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		System.out.println("123");
 		BoardButton tempButton = (BoardButton)e.getComponent();
+		PlayerType type = PlayerType.None;
+		
 		if(isGameEnd) {
 			return;
 		}
@@ -156,10 +163,12 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		else if(getCurrentPlayerNum() == 1) {
 			tempButton.setText("O");
 			dispCurrentPlayer.setText("Player " + 2);
+			type = PlayerType.P2;
 		}
 		else {
 			tempButton.setText("X");
 			dispCurrentPlayer.setText("Player " + 1);
+			type = PlayerType.P1;
 		}
 		changeTurn();
 		
@@ -169,11 +178,12 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		// y,x,type 채우기
 		int y = tempButton.y;
 		int x = tempButton.x;
-		PlayerType type = PlayerType.P1;
+	
+		System.out.println("mousePressed :"+y+","+x+","+type);
 		
 
 		//여기까지 알아내기
-		this.process_service.process(new SetStoneCommand(y, x, type, this.board_repo));
+		this.process_service.process(new SetStoneCommand(y, x, type, check_service, this.board_repo));
 		PlayerType[][] board = this.get_board_service.get_all();
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
