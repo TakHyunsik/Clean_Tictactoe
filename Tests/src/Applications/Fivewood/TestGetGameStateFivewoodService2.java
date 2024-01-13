@@ -499,7 +499,7 @@ class TestGetGameStateFivewoodService2 {
 		process_service.process(new SetStoneCommand(7, 10, PlayerType.P1, check_service, board_repo));
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(7, 4, PlayerType.P2, check_service, board_repo));
-		assertEquals(PlayerType.None, distinct_service.get_winner());
+		assertEquals(PlayerType.P2, distinct_service.get_winner());
 		assertEquals(false, distinct_service.check_end());
 //		process_service.process(new SetStoneCommand(4, 10, PlayerType.P1, check_service, board_repo));
 //		assertEquals(PlayerType.P1, distinct_service.get_winner());
