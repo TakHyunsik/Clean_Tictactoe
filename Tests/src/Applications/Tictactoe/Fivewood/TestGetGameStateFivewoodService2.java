@@ -65,6 +65,7 @@ class TestGetGameStateFivewoodService2 {
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(12, 3, PlayerType.P2, check_service, board_repo));
 		assertEquals(PlayerType.P2, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 
 	}
 
@@ -126,6 +127,7 @@ class TestGetGameStateFivewoodService2 {
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(11, 6, PlayerType.P2, check_service, board_repo));
 		assertEquals(PlayerType.P2, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 	}
 
 	@Test
@@ -172,6 +174,7 @@ class TestGetGameStateFivewoodService2 {
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(3, 5, PlayerType.P1, check_service, board_repo));
 		assertEquals(PlayerType.P1, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 
 	}
 
@@ -236,6 +239,7 @@ class TestGetGameStateFivewoodService2 {
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(4, 2, PlayerType.P2, check_service, board_repo));
 		assertEquals(PlayerType.P2, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 	}
 
 	@Test
@@ -304,7 +308,8 @@ class TestGetGameStateFivewoodService2 {
 		process_service.process(new SetStoneCommand(11, 8, PlayerType.P2, check_service, board_repo));
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(6, 8, PlayerType.P1, check_service, board_repo));
-		assertEquals(PlayerType.None, distinct_service.get_winner());
+		assertEquals(PlayerType.P1, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 
 	}
 
@@ -356,7 +361,8 @@ class TestGetGameStateFivewoodService2 {
 		process_service.process(new SetStoneCommand(5, 5, PlayerType.P1, check_service, board_repo));
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(0, 5, PlayerType.P2, check_service, board_repo));
-		assertEquals(PlayerType.None, distinct_service.get_winner());
+		assertEquals(PlayerType.P2, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 
 	}
 
@@ -494,6 +500,7 @@ class TestGetGameStateFivewoodService2 {
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(7, 4, PlayerType.P2, check_service, board_repo));
 		assertEquals(PlayerType.None, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 //		process_service.process(new SetStoneCommand(4, 10, PlayerType.P1, check_service, board_repo));
 //		assertEquals(PlayerType.P1, distinct_service.get_winner());
 	}
@@ -550,7 +557,8 @@ class TestGetGameStateFivewoodService2 {
 		process_service.process(new SetStoneCommand(10, 11, PlayerType.P1, check_service, board_repo));
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(10, 6, PlayerType.P2, check_service, board_repo));
-		assertEquals(PlayerType.None, distinct_service.get_winner());
+		assertEquals(PlayerType.P2, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 
 	}
 
@@ -613,6 +621,7 @@ class TestGetGameStateFivewoodService2 {
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(10, 4, PlayerType.P1, check_service, board_repo));
 		assertEquals(PlayerType.P1, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 	}
 
 	@Test
@@ -876,6 +885,7 @@ class TestGetGameStateFivewoodService2 {
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(12, 11, PlayerType.P2, check_service, board_repo));
 		assertEquals(PlayerType.P2, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 	}
 
 	@Test
@@ -1391,7 +1401,7 @@ class TestGetGameStateFivewoodService2 {
 		process_service.process(new SetStoneCommand(1, 3, PlayerType.P1, check_service, board_repo));
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(1, 8, PlayerType.P2, check_service, board_repo));
-		assertEquals(PlayerType.None, distinct_service.get_winner());
+		assertEquals(PlayerType.P2, distinct_service.get_winner());
 		assertEquals(false, distinct_service.check_end());
 	}
 
@@ -1545,7 +1555,8 @@ class TestGetGameStateFivewoodService2 {
 		process_service.process(new SetStoneCommand(9, 2, PlayerType.P2, check_service, board_repo));
 		assertEquals(PlayerType.None, distinct_service.get_winner());
 		process_service.process(new SetStoneCommand(9, 0, PlayerType.P1, check_service, board_repo));
-		assertEquals(PlayerType.None, distinct_service.get_winner());
+		assertEquals(PlayerType.P1, distinct_service.get_winner());
+		assertEquals(false, distinct_service.check_end());
 	}
 
 }

@@ -15,18 +15,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.BoardServices.IDistinctEndGameService;
 import AppInterfaces.BoardServices.IGetBoardService;
-import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.CommandService.IProcessCommandService;
 import Commons.PlayerType;
 import Entities.FivewoodBoard;
-import Fivewood.CheckSetableStoneFivewoodService;
 import Repository.IBoardRepository;
 import Repository.ICommandRepository;
 import Usecases.GetBoardService;
-//import Usecases.ProcessCommandService;
-//import Usecases.SetStoneCommand;
+import Usecases.ProcessCommandService;
+import Usecases.SetStoneCommand;
 
 public class GuiFivewoodView extends JFrame implements MouseListener {
 	IBoardRepository board_repo;
@@ -44,7 +43,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 	private int score1 = 0;
 	private int score2 = 0;
 	JLabel scoreLabel = new JLabel(" | " + score1 + " : " + score2);
-	JButton startNewGame = new JButton("�� ���� ����");
+	JButton startNewGame = new JButton("새 게임 시작");
 
 	JPanel titleBar = new JPanel();
 	JPanel AllRoom = new JPanel();
@@ -87,7 +86,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 
 		AllRoom.setLayout(new GridLayout(SIZE, SIZE));
 		for (int i = 0; i < SIZE * SIZE; i++) {
-			// ȭ�� ũ�� �����ϱ�
+			// 화면 크기 조정하기
 			BoardButton tempButton = new BoardButton(i, i, "");
 
 			tempButton.setFont(new Font("Impact", Font.PLAIN, 22));
@@ -162,7 +161,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 			return;
 		}
 		if (tempButton.getText().equals("O") || tempButton.getText().equals("X")) {
-			JOptionPane.showMessageDialog(AllRoom, "�̹� �� ��ġ�Դϴ�.");
+			JOptionPane.showMessageDialog(AllRoom, "이미 둔 곳입니다.");
 			return;
 		} else if (getCurrentPlayerNum() == 1) {
 			tempButton.setText("O");
@@ -180,17 +179,17 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 
 		System.out.println("mousePressed :" + y + "," + x + "," + type);
 
-		// ������� �˾Ƴ���
+		// 여기까지 알아내기
 		this.process_service.process(new SetStoneCommand(y, x, type, check_service, this.board_repo));
 		PlayerType[][] board = this.get_board_service.get_all();
-		for (int i = 0; i < SIZE; i++) {
-			for (int j = 0; j < SIZE; j++) {
-				// System.out.println(board[i][j]);
-			}
-		}
+//		for (int i = 0; i < SIZE; i++) {
+//			for (int j = 0; j < SIZE; j++) {
+//				// System.out.println(board[i][j]);
+//			}
+//		}
 		PlayerType result = distinct_service.get_winner();
 		if (result == PlayerType.P1 || result == PlayerType.P2) {
-			JOptionPane.showMessageDialog(AllRoom, "������ �������ϴ�. " + result + " �� �¸��ϼ̽��ϴ�.");
+			JOptionPane.showMessageDialog(AllRoom, "플레이어 " + result + " 의 승리입니다.");
 			if (result == PlayerType.P1) {
 				score1++;
 			} else {
@@ -199,7 +198,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 			scoreLabel.setText(" | " + score1 + " : " + score2);
 			isGameEnd = true;
 		} else if (result == PlayerType.None && distinct_service.check_end()) {
-			JOptionPane.showMessageDialog(AllRoom, "�̹� ������ �������ϴ�.");
+			JOptionPane.showMessageDialog(AllRoom, "비겼습니다.");
 			isGameEnd = true;
 		}
 
