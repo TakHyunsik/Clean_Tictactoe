@@ -1,4 +1,4 @@
-package Fivewood;
+package Service.Fivewood;
 
 import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.CommandService.ICommand;

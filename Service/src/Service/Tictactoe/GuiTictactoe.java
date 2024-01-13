@@ -1,4 +1,4 @@
-package Tictactoe;
+package Service.Tictactoe;
 
 public class GuiTictactoe {
 

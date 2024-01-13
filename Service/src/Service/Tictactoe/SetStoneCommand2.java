@@ -1,7 +1,8 @@
-package Tictactoe;
+package Service.Tictactoe;
 
 import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.CommandService.ICommand;
+import Applications.Tictactoe.CheckSetableStoneTictactoeService;
 import Commons.PlayerType;
 import Entities.TicTacToeBoard;
 import Repository.IBoardRepository;

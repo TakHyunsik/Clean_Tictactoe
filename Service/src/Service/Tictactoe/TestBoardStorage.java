@@ -1,4 +1,4 @@
-package Tictactoe;
+package Service.Tictactoe;
 
 import Commons.PlayerType;
 import DomainInterfaces.IGameBoard;

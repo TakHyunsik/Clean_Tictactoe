@@ -1,4 +1,4 @@
-package Tictactoe;
+package Service.Tictactoe;
 
 import java.util.Optional;
 import java.util.Stack;
