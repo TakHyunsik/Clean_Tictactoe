@@ -13,10 +13,10 @@ import Applications.Tictactoe.TestBoardStorage;
 import Applications.Tictactoe.TestCommandStorage;
 import Commons.PlayerType;
 import Entities.FivewoodBoard;
-import Fivewood.CheckSetableStoneFivewoodService;
 import Fivewood.GetGameStateFivewoodService;
 import Repository.IBoardRepository;
 import Repository.ICommandRepository;
+import Tictactoe.CheckSetableStoneTictactoeService;
 import Usecases.GetBoardService;
 import Usecases.ProcessCommandService;
 import Usecases.SetStoneCommand;
@@ -33,7 +33,7 @@ class TestGetGameStateFivewoodService2 {
 	void setUp() throws Exception {
 		board_repo = new TestBoardStorage(new FivewoodBoard());
 		cmd_repo = new TestCommandStorage(null);
-		check_service = new CheckSetableStoneFivewoodService(board_repo);
+		check_service = new CheckSetableStoneTictactoeService(board_repo);
 		distinct_service = new GetGameStateFivewoodService(board_repo);
 		process_service = new ProcessCommandService(cmd_repo);
 		get_board_service = new GetBoardService(board_repo);
