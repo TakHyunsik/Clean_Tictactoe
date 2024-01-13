@@ -5,3 +5,14 @@
 ```bash
 git clone https://github.com/TakHyunsik/Clean_Tictactoe.git
 ```
+
+# How to Play
+### Run `GuiTictactoe.java`
+```bash
+Service/src/Service/Tictactoe/GuiTictactoe.java
+```
+
+### Run `GuiFivewood.java`
+```bash
+Service/src/Service/Fivewood/GuiFivewood.java
+```
