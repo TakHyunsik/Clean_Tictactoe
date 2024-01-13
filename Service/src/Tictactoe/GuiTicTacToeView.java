@@ -40,7 +40,7 @@ public class GuiTicTacToeView extends JFrame implements MouseListener {
 	private int score1 = 0;
 	private int score2 = 0;
 	JLabel scoreLabel = new JLabel(" | " + score1 + " : " + score2);
-	JButton startNewGame = new JButton("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+	JButton startNewGame = new JButton("»õ °ÔÀÓ ½ÃÀÛ");
 
 	JPanel titleBar = new JPanel();
 	JPanel nineRoom = new JPanel();
@@ -91,11 +91,9 @@ public class GuiTicTacToeView extends JFrame implements MouseListener {
 	}
 
 	public void setActionOfStartNewGame() {
-		// 9ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ oxï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
 		startNewGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// ttt.resetGame(START_PLAYER);
 				isGameEnd = false;
 				for (int i = 0; i < nineRoom.getComponents().length; i++) {
 					((JButton) nineRoom.getComponent(i)).setText("");
@@ -152,7 +150,7 @@ public class GuiTicTacToeView extends JFrame implements MouseListener {
 			return;
 		}
 		if (tempButton.getText().equals("O") || tempButton.getText().equals("X")) {
-			JOptionPane.showMessageDialog(nineRoom, "ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
+			JOptionPane.showMessageDialog(nineRoom, "ÀÌ¹Ì µÐ °÷ÀÔ´Ï´Ù.");
 			return;
 		} else if (getCurrentPlayerNum() == 1) {
 			tempButton.setText("O");
@@ -162,8 +160,6 @@ public class GuiTicTacToeView extends JFrame implements MouseListener {
 			dispCurrentPlayer.setText("Player " + 1);
 		}
 		changeTurn();
-
-		// System.out.println("(" + e.getX() + ", " + e.getY() + ") ");
 
 		int[][] ticArr = new int[SIZE][SIZE];
 		for (int i = 0; i < ticArr.length; i++) {
@@ -179,16 +175,10 @@ public class GuiTicTacToeView extends JFrame implements MouseListener {
 		}
 
 		this.process_service.process(new SetStoneCommand2(ticArr, this.board_repo));
-//		PlayerType[][] board = this.get_board_service.get_all();
-//		for (int i = 0; i < 3; i++) {
-//			for (int j = 0; j < 3; j++) {
-//				// System.out.println(board[i][j]);
-//			}
-//		}
 		PlayerType result = distinct_service.get_winner();
 		// System.out.println("result: " + result);
 		if (result == PlayerType.P1 || result == PlayerType.P2) {
-			JOptionPane.showMessageDialog(nineRoom, "ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ " + result + "ï¿½ï¿½ ï¿½Â¸ï¿½ï¿½Ô´Ï´ï¿½.");
+			JOptionPane.showMessageDialog(nineRoom, "ÇÃ·¹ÀÌ¾î " + result + "ÀÇ ½Â¸®ÀÔ´Ï´Ù.");
 			if (result == PlayerType.P1) {
 				score1++;
 			} else {
@@ -197,7 +187,7 @@ public class GuiTicTacToeView extends JFrame implements MouseListener {
 			scoreLabel.setText(" | " + score1 + " : " + score2);
 			isGameEnd = true;
 		} else if (result == PlayerType.None && distinct_service.check_end()) {
-			JOptionPane.showMessageDialog(nineRoom, "ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+			JOptionPane.showMessageDialog(nineRoom, "ºñ°å½À´Ï´Ù.");
 			isGameEnd = true;
 		}
 
