@@ -6,14 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import DomainInterfaces.IGameBoard;
-import Entities.FiveWoodBoard;
+import Entities.FivewoodBoard;
 
 class TestTicTacToeBoard {
 	IGameBoard board;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		board = new FiveWoodBoard();
+		board = new FivewoodBoard();
 	}
 
 	@Test
