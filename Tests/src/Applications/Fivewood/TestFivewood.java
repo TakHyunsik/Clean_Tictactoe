@@ -1,4 +1,4 @@
-package Applications.Tictactoe.Fivewood;
+package Applications.Fivewood;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
