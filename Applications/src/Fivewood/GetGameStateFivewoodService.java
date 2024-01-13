@@ -41,24 +41,55 @@ public class GetGameStateFivewoodService implements IDistinctEndGameService {
 	public PlayerType get_가로(int y, int x) {
 		IGameBoard board = repo.load_board();
 		PlayerType type = board.get_in_board(y, x);
+		
+	//	if(board.get_in_board(y, x) == )
 		for(int i = 1; i < 5; i++) {
-			
+			//사이즈 제한 두기
 			if(board.get_in_board(y, x) == type && board.get_in_board(y, x + i) != type) {
 				return PlayerType.None;
-		//		return PlayerType.P1;
+		
 			}
-//			else if(board.get_in_board(y, x) == type && board.get_in_board(y, x + i) != type) {
-//				return PlayerType.None;
-		//		return PlayerType.P2;
-			//}
-			
-				
-			
-			
-			
+
+
 			
 		}
 		
 		return type;
+		
+
 	}
+	public PlayerType get_세로(int y, int x) {
+		IGameBoard board = repo.load_board();
+		PlayerType type = board.get_in_board(y, x);
+		
+		for(int q = 1; q < 5; q++) {
+			if(board.get_in_board(y, x) == type && board.get_in_board(y + q, x) != type) {
+				return PlayerType.None;
+			}
+		}
+		return type;
+	}
+	public PlayerType get_오른쪽위대각선(int y, int x) {
+		IGameBoard board = repo.load_board();
+		PlayerType type = board.get_in_board(y, x);
+		
+		for(int w = 1; w < 5; w++) {
+			if(board.get_in_board(y, x) == type && board.get_in_board(y - w, x + w) != type) {
+				return PlayerType.None;
+			}
+		}
+		return type;
+	}
+	public PlayerType get_왼쪽위대각선(int y, int x) {
+		IGameBoard board = repo.load_board();
+		PlayerType type = board.get_in_board(y, x);
+		
+		for(int a = 1; a < 5; a++) {
+			if(board.get_in_board(y, x) == type && board.get_in_board(y - a, x - a) != type) {
+				return PlayerType.None;
+			}
+		}
+		return type;
+	}
+	
 }
