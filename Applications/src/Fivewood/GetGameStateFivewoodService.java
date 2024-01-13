@@ -14,82 +14,146 @@ public class GetGameStateFivewoodService implements IDistinctEndGameService {
 	}
 
 	@Override
-	// 5░│░б ┐м╝╙╡╚┤┘. /,\,д╤,д╙
-	// /, \ ┐═ д╙, д╤ ╕ж ▒╕║╨┴■▒т
-	// /, \ ┤┬ xy ├р└╗ ╟╧│к╛┐ ┤ї╟╧│к░┼│к ╗й▒т
+	// 5я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜я┐╜╙╡╚┤я┐╜. /,\,я┐╜я┐╜,я┐╜я┐╜
+	// /, \ я┐╜я┐╜ я┐╜я┐╜, я┐╜я┐╜ я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
+	// /, \ я┐╜я┐╜ xy я┐╜я┐╜я┐╜я┐╜ я┐╜╧│я┐╜я┐╜я┐╜ я┐╜я┐╜я┐╜╧│я┐╜я┐╜┼│я┐╜ я┐╜я┐╜я┐╜я┐╜
 	
-	// /┤┬ x├р ░к└╠ │Ї░э y├р ░к└╠ │╖└║╛╓░б ▒т┴╪!
-	// ▒т┴╪└╗ ▒т┴╪└╕╖╬ x├р - 1 y├р + 1 4╣▌║╣
+	// /я┐╜я┐╜ xя┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜ yя┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜╓░я┐╜ я┐╜я┐╜я┐╜я┐╜!
+	// я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ xя┐╜я┐╜ - 1 yя┐╜я┐╜ + 1 4я┐╜▌║я┐╜
 	
-	// д╤┤┬ y├р└╠ ┴й └█└║╛╓░б ▒т┴╪ y├р ╟╧│к╛┐ ┤├╕о▒т
+	// я┐╜╤┤я┐╜ yя┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜╓░я┐╜ я┐╜я┐╜я┐╜я┐╜ yя┐╜я┐╜ я┐╜╧│я┐╜я┐╜я┐╜ я┐╜├╕я┐╜я┐╜я┐╜
 	
-	// д╙┤┬ x├р ┴й ┼л╛╓░б ▒т┴╪ x├р ╟╧│к╛┐ ┴┘└╠▒т
+	// я┐╜╙┤я┐╜ xя┐╜я┐╜ я┐╜я┐╜ ┼ля┐╜╓░я┐╜ я┐╜я┐╜я┐╜я┐╜ xя┐╜я┐╜ я┐╜╧│я┐╜я┐╜я┐╜ я┐╜я┐╜я┐╜╠▒я┐╜
 	
-	// \┤┬ x├р y├р└╠ ┴й ┼л╛╓░б ▒т┴╪
-	// x y ├р ╟╧│к╛┐ ┴┘└╠▒т
+	// \я┐╜я┐╜ xя┐╜я┐╜ yя┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜ ┼ля┐╜╓░я┐╜ я┐╜я┐╜я┐╜я┐╜
+	// x y я┐╜я┐╜ я┐╜╧│я┐╜я┐╜я┐╜ я┐╜я┐╜я┐╜╠▒я┐╜
 	public PlayerType get_winner() {
 		IGameBoard board = repo.load_board();
+		 int size = board.get_size();
+		 System.out.println("get_winner");
+		 for (int y = 0; y < size; y++) {
+		        for (int x = 0; x < size; x++) {
+		        	if(board.get_in_board(y, x)!=PlayerType.None) {
+		        		System.out.println("x,y,p "+" "+x+" "+y+" "+board.get_in_board(y, x));
+		        		PlayerType winner = я┐╜я┐╜я┐╜я┐╜_╚оя┐╜я┐╜(y, x);
+			            if (winner != PlayerType.None) {
+			                return winner;
+			            }
+		        	}
+		        }
+		    }
 
-		return PlayerType.None;
-	}
+		    return PlayerType.None;
+		}
+
+	private PlayerTypeя┐╜я┐╜я┐╜я┐╜_╚оя┐╜я┐╜(
+
+	int y,
+	int x)
+	{
+		    PlayerType winner = get_я┐╜я┐╜я┐╜я┐╜(y, x);
+		    if (winner != PlayerType.None) {
+		        return winner;
+		    }
+
+		    winner = get_я┐╜я┐╜я┐╜я┐╜(y, x);
+		    if (winner != PlayerType.None) {
+		        return winner;
+		    }
+
+		    winner = get_я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ы░вя┐╜я┐╜(y, x);
+		    if (winner != PlayerType.None) {
+		        return winner;
+		    }
+
+		    winner = get_я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ы░вя┐╜я┐╜(y, x);
+		    if (winner != PlayerType.None) {
+		        return winner;
+		    }
+
+		    return PlayerType.None;
+		}
 
 	@Override
 	public boolean check_end() {
 		// TODO Auto-generated method stub
 		return repo.load_board().check_be_full();
 	}
-	public PlayerType get_░б╖╬(int y, int x) {
-		IGameBoard board = repo.load_board();
-		PlayerType type = board.get_in_board(y, x);
-		
-	//	if(board.get_in_board(y, x) == )
-		for(int i = 1; i < 5; i++) {
-			//╗ч└╠┴ю ┴ж╟╤ ╡╬▒т
-			if(board.get_in_board(y, x) == type && board.get_in_board(y, x + i) != type) {
-				return PlayerType.None;
-		
-			}
 
+	public PlayerType get_я┐╜я┐╜я┐╜я┐╜(
+	int y,
+	int x)
+	{
+		IGameBoard board = repo.load_board();
+		PlayerType type = board.get_in_board(y, x);
 
-			
+		if (x >= board.get_size() - 4) {
+			return PlayerType.None;
 		}
-		
+		for (int i = 1; i < 5; i++) {
+			// я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜ я┐╜╬▒я┐╜
+			if (board.get_in_board(y, x) == type && board.get_in_board(y, x + i) != type) {
+				return PlayerType.None;
+
+			}
+		}
+
 		return type;
-		
 
 	}
-	public PlayerType get_╝╝╖╬(int y, int x) {
+	public PlayerType get_я┐╜я┐╜я┐╜я┐╜(
+	int y,
+	int x)
+	{
 		IGameBoard board = repo.load_board();
 		PlayerType type = board.get_in_board(y, x);
-		
-		for(int q = 1; q < 5; q++) {
-			if(board.get_in_board(y, x) == type && board.get_in_board(y + q, x) != type) {
+
+		if (y <= board.get_size() - 12) {
+			return PlayerType.None;
+		}
+
+		for (int q = 1; q < 5; q++) {
+			if (board.get_in_board(y, x) == type && board.get_in_board(y - q, x) != type) {
 				return PlayerType.None;
 			}
 		}
 		return type;
 	}
-	public PlayerType get_┐└╕е┬╩└з┤ы░в╝▒(int y, int x) {
+	public PlayerType get_я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ы░вя┐╜я┐╜(
+	int y,
+	int x)
+	{
 		IGameBoard board = repo.load_board();
 		PlayerType type = board.get_in_board(y, x);
-		
-		for(int w = 1; w < 5; w++) {
-			if(board.get_in_board(y, x) == type && board.get_in_board(y - w, x + w) != type) {
+
+		if (y <= board.get_size() - 12 || x >= board.get_size() - 4) {
+			return PlayerType.None;
+		}
+
+		for (int w = 1; w < 5; w++) {
+			if (board.get_in_board(y, x) == type && board.get_in_board(y - w, x + w) != type) {
 				return PlayerType.None;
 			}
 		}
 		return type;
 	}
-	public PlayerType get_┐▐┬╩└з┤ы░в╝▒(int y, int x) {
+	public PlayerType get_я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ы░вя┐╜я┐╜(
+	int y,
+	int x)
+	{
 		IGameBoard board = repo.load_board();
 		PlayerType type = board.get_in_board(y, x);
-		
-		for(int a = 1; a < 5; a++) {
-			if(board.get_in_board(y, x) == type && board.get_in_board(y - a, x - a) != type) {
+
+		if (y <= board.get_size() - 12 || x <= board.get_size() - 12) {
+			return PlayerType.None;
+		}
+
+		for (int a = 1; a < 5; a++) {
+			if (board.get_in_board(y, x) == type && board.get_in_board(y - a, x - a) != type) {
 				return PlayerType.None;
 			}
 		}
 		return type;
 	}
-	
+
 }

@@ -17,9 +17,11 @@ import javax.swing.JPanel;
 
 import AppInterfaces.BoardServices.IDistinctEndGameService;
 import AppInterfaces.BoardServices.IGetBoardService;
+import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.CommandService.IProcessCommandService;
 import Commons.PlayerType;
 import Entities.FivewoodBoard;
+import Fivewood.CheckSetableStoneFivewoodService;
 import Repository.IBoardRepository;
 import Repository.ICommandRepository;
 import Usecases.GetBoardService;
@@ -31,6 +33,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 	ICommandRepository cmd_repo;
 	IDistinctEndGameService distinct_service;
 	IProcessCommandService process_service;
+	ICheckSetableRuleService check_service;
 	IGetBoardService get_board_service;
 
 	private static final long serialVersionUID = 1L;
@@ -41,7 +44,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 	private int score1 = 0;
 	private int score2 = 0;
 	JLabel scoreLabel = new JLabel(" | " + score1 + " : " + score2);
-	JButton startNewGame = new JButton("»õ °ÔÀÓ ½ÃÀÛ");
+	JButton startNewGame = new JButton("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 	JPanel titleBar = new JPanel();
 	JPanel AllRoom = new JPanel();
@@ -57,6 +60,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		board_repo = new FivewoodBoardStorage(new FivewoodBoard());
 		cmd_repo = new FivewoodCommandStorage(null);
 		distinct_service = new GetGameStateFivewoodService(board_repo);
+		check_service = new CheckSetableStoneFivewoodService(board_repo);
 		process_service = new ProcessCommandService(cmd_repo);
 		get_board_service = new GetBoardService(board_repo);
 
@@ -85,6 +89,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		for (int i = 0; i < SIZE * SIZE; i++) {
 			// È­ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 			BoardButton tempButton = new BoardButton(i, i, "");
+
 			tempButton.setFont(new Font("Impact", Font.PLAIN, 22));
 			AllRoom.add(tempButton);
 
@@ -149,36 +154,43 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		System.out.println("123");
 		BoardButton tempButton = (BoardButton) e.getComponent();
+		PlayerType type = PlayerType.None;
+
 		if (isGameEnd) {
 			return;
 		}
 		if (tempButton.getText().equals("O") || tempButton.getText().equals("X")) {
-			JOptionPane.showMessageDialog(AllRoom, "ÀÌ¹Ì µÐ À§Ä¡ÀÔ´Ï´Ù.");
+			JOptionPane.showMessageDialog(AllRoom, "ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ô´Ï´ï¿½.");
 			return;
 		} else if (getCurrentPlayerNum() == 1) {
 			tempButton.setText("O");
 			dispCurrentPlayer.setText("Player " + 2);
+			type = PlayerType.P2;
 		} else {
 			tempButton.setText("X");
 			dispCurrentPlayer.setText("Player " + 1);
+			type = PlayerType.P1;
 		}
 		changeTurn();
 
 		int y = tempButton.y;
 		int x = tempButton.x;
-		PlayerType type = PlayerType.P1;
 
-		this.process_service.process(new SetStoneCommand(y, x, type, this.board_repo));
+		System.out.println("mousePressed :" + y + "," + x + "," + type);
+
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ï¿½ï¿½
+		this.process_service.process(new SetStoneCommand(y, x, type, check_service, this.board_repo));
 		PlayerType[][] board = this.get_board_service.get_all();
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
-//				System.out.println(board[i][j]);
+				// System.out.println(board[i][j]);
 			}
 		}
 		PlayerType result = distinct_service.get_winner();
 		if (result == PlayerType.P1 || result == PlayerType.P2) {
-			JOptionPane.showMessageDialog(AllRoom, "°ÔÀÓÀÌ ³¡³µ½À´Ï´Ù. " + result + " ÀÌ ½Â¸®ÇÏ¼Ì½À´Ï´Ù.");
+			JOptionPane.showMessageDialog(AllRoom, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. " + result + " ï¿½ï¿½ ï¿½Â¸ï¿½ï¿½Ï¼Ì½ï¿½ï¿½Ï´ï¿½.");
 			if (result == PlayerType.P1) {
 				score1++;
 			} else {
@@ -187,7 +199,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 			scoreLabel.setText(" | " + score1 + " : " + score2);
 			isGameEnd = true;
 		} else if (result == PlayerType.None && distinct_service.check_end()) {
-			JOptionPane.showMessageDialog(AllRoom, "ÀÌ¹Ì °ÔÀÓÀÌ ³¡³µ½À´Ï´Ù.");
+			JOptionPane.showMessageDialog(AllRoom, "ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 			isGameEnd = true;
 		}
 

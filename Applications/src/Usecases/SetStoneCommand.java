@@ -4,7 +4,6 @@ import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.CommandService.ICommand;
 import Commons.PlayerType;
 import Repository.IBoardRepository;
-import Tictactoe.CheckSetableStoneTictactoeService;
 
 public class SetStoneCommand implements ICommand {
 	int _y, _x;
@@ -13,12 +12,12 @@ public class SetStoneCommand implements ICommand {
 	ICheckSetableRuleService rule;
 	boolean result;
 
-	public SetStoneCommand(int y, int x, PlayerType type, IBoardRepository repo) {
+	public SetStoneCommand(int y, int x, PlayerType type, ICheckSetableRuleService rule, IBoardRepository repo) {
 		_y = y;
 		_x = x;
 		_type = type;
 		_repo = repo;
-		rule = new CheckSetableStoneTictactoeService(repo);
+		this.rule = rule;
 		result = rule.check_setable_point(_y, _x, _type);
 	}
 
@@ -29,7 +28,9 @@ public class SetStoneCommand implements ICommand {
 	 */
 	@Override
 	public void execute() throws Exception {
+		System.out.println("execute 1" + result);
 		if (result) {
+			System.out.println("execute 2");
 			_repo.update_board(_y, _x, _type);
 		} else {
 			throw new Exception("Exception execute SetStoneCommand");
