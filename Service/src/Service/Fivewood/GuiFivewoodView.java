@@ -1,4 +1,4 @@
-package Fivewood;
+package Service.Fivewood;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -19,6 +19,8 @@ import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.BoardServices.IDistinctEndGameService;
 import AppInterfaces.BoardServices.IGetBoardService;
 import AppInterfaces.CommandService.IProcessCommandService;
+import Applications.Fivewood.CheckSetableStoneFivewoodService;
+import Applications.Fivewood.GetGameStateFivewoodService;
 import Commons.PlayerType;
 import Entities.FivewoodBoard;
 import Repository.IBoardRepository;

@@ -1,4 +1,4 @@
-package Fivewood;
+package Applications.Fivewood;
 
 import AppInterfaces.BoardServices.IDistinctEndGameService;
 import Commons.PlayerType;

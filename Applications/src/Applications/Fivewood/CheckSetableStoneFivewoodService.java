@@ -1,13 +1,13 @@
-package Tictactoe;
+package Applications.Fivewood;
 
 import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import Commons.PlayerType;
 import Repository.IBoardRepository;
 
-public class CheckSetableStoneTictactoeService implements ICheckSetableRuleService {
+public class CheckSetableStoneFivewoodService implements ICheckSetableRuleService {
 	IBoardRepository repo;
 
-	public CheckSetableStoneTictactoeService(IBoardRepository repo) {
+	public CheckSetableStoneFivewoodService(IBoardRepository repo) {
 		this.repo = repo;
 	}
 

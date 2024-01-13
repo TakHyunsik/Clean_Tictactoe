@@ -1,4 +1,4 @@
-package Fivewood;
+package Service.Fivewood;
 
 public class BoardButton extends javax.swing.JButton {
 

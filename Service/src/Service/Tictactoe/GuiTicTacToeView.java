@@ -1,4 +1,4 @@
-package Tictactoe;
+package Service.Tictactoe;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import AppInterfaces.BoardServices.IDistinctEndGameService;
 import AppInterfaces.BoardServices.IGetBoardService;
 import AppInterfaces.CommandService.IProcessCommandService;
+import Applications.Tictactoe.GetGameStateTictactoeService;
 import Commons.PlayerType;
 import Entities.TicTacToeBoard;
 import Repository.IBoardRepository;
@@ -176,7 +177,6 @@ public class GuiTicTacToeView extends JFrame implements MouseListener {
 
 		this.process_service.process(new SetStoneCommand2(ticArr, this.board_repo));
 		PlayerType result = distinct_service.get_winner();
-		// System.out.println("result: " + result);
 		if (result == PlayerType.P1 || result == PlayerType.P2) {
 			JOptionPane.showMessageDialog(nineRoom, "플레이어 " + result + "의 승리입니다.");
 			if (result == PlayerType.P1) {

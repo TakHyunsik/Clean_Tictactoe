@@ -1,4 +1,4 @@
-package Fivewood;
+package Service.Fivewood;
 
 import Commons.PlayerType;
 import DomainInterfaces.IGameBoard;

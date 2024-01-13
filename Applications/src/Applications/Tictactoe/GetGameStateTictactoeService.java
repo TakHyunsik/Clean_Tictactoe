@@ -1,4 +1,4 @@
-package Tictactoe;
+package Applications.Tictactoe;
 
 import AppInterfaces.BoardServices.IDistinctEndGameService;
 import Commons.PlayerType;
