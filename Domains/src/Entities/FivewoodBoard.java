@@ -3,10 +3,10 @@ package Entities;
 import Commons.PlayerType;
 import DomainInterfaces.IGameBoard;
 
-public class FivewoodBoard implements IGameBoard {
+public class FiveWoodBoard implements IGameBoard {
 	private PlayerType[][] Board;
 
-	public FivewoodBoard() {
+	public FiveWoodBoard() {
 		Board = new PlayerType[this.get_size()][this.get_size()];
 		for (int i = 0; i < this.get_size(); i++) {
 			for (int j = 0; j < this.get_size(); j++) {
@@ -15,7 +15,7 @@ public class FivewoodBoard implements IGameBoard {
 		}
 	}
 
-	public FivewoodBoard(PlayerType[][] board) {
+	public FiveWoodBoard(PlayerType[][] board) {
 		this.Board = board;
 	}
 
@@ -55,7 +55,6 @@ public class FivewoodBoard implements IGameBoard {
 		// 전부 성공
 		return true;
 	}
-
 
 	@Override
 	public int get_count() {
@@ -105,6 +104,6 @@ public class FivewoodBoard implements IGameBoard {
 		for (int i = 0; i < get_size(); i++) {
 			new_board[i] = Board[i].clone();
 		}
-		return new FivewoodBoard(new_board);
+		return new FiveWoodBoard(new_board);
 	}
 }
