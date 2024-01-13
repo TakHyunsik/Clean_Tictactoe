@@ -16,9 +16,9 @@ import Entities.TicTacToeBoard;
 import Repository.IBoardRepository;
 import Repository.ICommandRepository;
 import Tictactoe.GetGameStateTictactoeService;
-import Tictactoe.SetStoneCommand;
 import Usecases.GetBoardService;
 import Usecases.ProcessCommandService;
+import Usecases.SetStoneCommand;
 
 class TestTictactoe {
 	IBoardRepository board_repo;

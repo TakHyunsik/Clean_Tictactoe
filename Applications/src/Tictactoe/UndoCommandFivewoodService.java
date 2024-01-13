@@ -3,10 +3,10 @@ package Tictactoe;
 import AppInterfaces.CommandService.IUndoCommandService;
 import Repository.ICommandRepository;
 
-public class UndoCommandTictactoeService implements IUndoCommandService {
+public class UndoCommandFivewoodService implements IUndoCommandService {
 	ICommandRepository repo;
 
-	public UndoCommandTictactoeService(ICommandRepository repo) {
+	public UndoCommandFivewoodService(ICommandRepository repo) {
 		this.repo = repo;
 	}
 

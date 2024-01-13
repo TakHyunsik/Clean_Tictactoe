@@ -14,12 +14,20 @@ public class SetStoneCommand2 implements ICommand {
 
 	public SetStoneCommand2(int[][] ticArr, IBoardRepository repo) {
 		rule = new CheckSetableStoneTictactoeService(repo);
+		_repo = repo;
 		board = new TicTacToeBoard();
 		for(int i=0; i<3; i++) {
 			for(int j=0; j<3; j++) {
-				System.out.print(ticArr[i][j]+" ");
+				if(ticArr[i][j] == 1) {
+					board.set_in_board(i, j, PlayerType.P1);
+				}
+				else if(ticArr[i][j] == 2) {
+					board.set_in_board(i, j, PlayerType.P2);
+				}
+				else {
+					board.set_in_board(i, j, PlayerType.None);
+				}
 			}
-			System.out.println();
 		}
 		
 		result = true;
@@ -33,7 +41,7 @@ public class SetStoneCommand2 implements ICommand {
 	@Override
 	public void execute() throws Exception {
 		if (result) {
-			_repo.save_board(board);;
+			_repo.save_board(board);
 		} else {
 			throw new Exception("Exception execute SetStoneCommand");
 		}

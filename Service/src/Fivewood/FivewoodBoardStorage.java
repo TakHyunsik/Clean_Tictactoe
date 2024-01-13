@@ -1,15 +1,17 @@
-package Tictactoe;
+package Fivewood;
 
 import Commons.PlayerType;
 import DomainInterfaces.IGameBoard;
+import Entities.FivewoodBoard;
+import Entities.TicTacToeBoard;
 import Repository.IBoardRepository;
 
-public class TestBoardStorage implements IBoardRepository {
+public class FivewoodBoardStorage implements IBoardRepository {
 
 	IGameBoard board;
 
-	public TestBoardStorage(IGameBoard board) {
-		this.board = board;
+	public FivewoodBoardStorage(FivewoodBoard FivewoodBoard) {
+		this.board = FivewoodBoard;
 	}
 
 	@Override
