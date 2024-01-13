@@ -25,7 +25,7 @@ import Repository.ICommandRepository;
 import Usecases.GetBoardService;
 import Usecases.ProcessCommandService;
 
-public class CliTicTacToeView extends JFrame implements MouseListener {
+public class GuiTicTacToeView extends JFrame implements MouseListener {
 	IBoardRepository board_repo;
 	ICommandRepository cmd_repo;
 	IDistinctEndGameService distinct_service;
@@ -49,7 +49,7 @@ public class CliTicTacToeView extends JFrame implements MouseListener {
 
 	private boolean isGameEnd = false;
 
-	public CliTicTacToeView() {
+	public GuiTicTacToeView() {
 		super("TicTacToe");
 		this.resetGame(1);
 
@@ -179,12 +179,12 @@ public class CliTicTacToeView extends JFrame implements MouseListener {
 		}
 
 		this.process_service.process(new SetStoneCommand2(ticArr, this.board_repo));
-		PlayerType[][] board = this.get_board_service.get_all();
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				// System.out.println(board[i][j]);
-			}
-		}
+//		PlayerType[][] board = this.get_board_service.get_all();
+//		for (int i = 0; i < 3; i++) {
+//			for (int j = 0; j < 3; j++) {
+//				// System.out.println(board[i][j]);
+//			}
+//		}
 		PlayerType result = distinct_service.get_winner();
 		// System.out.println("result: " + result);
 		if (result == PlayerType.P1 || result == PlayerType.P2) {

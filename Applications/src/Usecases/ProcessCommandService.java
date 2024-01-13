@@ -13,8 +13,6 @@ public class ProcessCommandService implements IProcessCommandService {
 
 	@Override
 	public boolean process(ICommand cmd) {
-		System.out.println("process");
-		System.out.println(cmd.check_executable());
 		if (cmd.check_executable()) {
 			try {
 				cmd.execute();

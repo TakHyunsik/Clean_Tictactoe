@@ -4,7 +4,6 @@ import AppInterfaces.BoardServices.ICheckSetableRuleService;
 import AppInterfaces.CommandService.ICommand;
 import Commons.PlayerType;
 import Repository.IBoardRepository;
-import Tictactoe.CheckSetableStoneTictactoeService;
 
 public class SetStoneCommand implements ICommand {
 	int _y, _x;
@@ -14,15 +13,16 @@ public class SetStoneCommand implements ICommand {
 	boolean result;
 	public String str;
 
-	public SetStoneCommand(int y, int x, PlayerType type, IBoardRepository repo) {
+	public SetStoneCommand(int y, int x, PlayerType type, ICheckSetableRuleService rule, IBoardRepository repo) {
 		_y = y;
 		_x = x;
 		_type = type;
 		_repo = repo;
-		rule = new CheckSetableStoneTictactoeService(repo);
+		this.rule = rule;
 		result = rule.check_setable_point(_y, _x, _type);
 		String str_type = (type == PlayerType.P1) ? "PlayerType.P1" : "PlayerType.P2";
-		str = String.format("process_service.process(new SetStoneCommand(%d, %d, %s, board_repo));", y, x, str_type);
+		str = String.format("process_service.process(new SetStoneCommand(%d, %d, %s, check_service, board_repo));", y,
+				x, str_type);
 	}
 
 	@Override

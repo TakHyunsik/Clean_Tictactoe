@@ -1,9 +1,9 @@
 package Tictactoe;
 
-public class CliTictactoe {
+public class GuiTictactoe {
 
 	public static void main(String[] args) {
-		new CliTicTacToeView();
+		new GuiTicTacToeView();
 
 	}
 

@@ -1,4 +1,4 @@
-package Applications;
+package Applications.Tictactoe;
 
 import AppInterfaces.BoardServices.IDistinctEndGameService;
 import AppInterfaces.BoardServices.IGetBoardService;

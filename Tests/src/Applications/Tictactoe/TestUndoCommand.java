@@ -1,4 +1,4 @@
-package Applications;
+package Applications.Tictactoe;
 
 import AppInterfaces.CommandService.IUndoCommandService;
 import Repository.ICommandRepository;

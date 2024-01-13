@@ -28,9 +28,7 @@ public class SetStoneCommand implements ICommand {
 	 */
 	@Override
 	public void execute() throws Exception {
-		System.out.println("execute 1" + result);
 		if (result) {
-			System.out.println("execute 2");
 			_repo.update_board(_y, _x, _type);
 		} else {
 			throw new Exception("Exception execute SetStoneCommand");

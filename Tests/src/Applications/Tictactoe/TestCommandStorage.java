@@ -1,4 +1,4 @@
-package Applications;
+package Applications.Tictactoe;
 
 import java.util.Optional;
 import java.util.Stack;
