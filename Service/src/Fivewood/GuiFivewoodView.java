@@ -85,13 +85,14 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 		add(titleBar, BorderLayout.NORTH);
 
 		AllRoom.setLayout(new GridLayout(SIZE, SIZE));
-		for (int i = 0; i < SIZE * SIZE; i++) {
-			// 화면 크기 조정하기
-			BoardButton tempButton = new BoardButton(i, i, "");
+		for (int y = 0; y < SIZE; y++) {
+			for (int x = 0; x < SIZE; x++) {
+				// 화면 크기 조정하기
+				BoardButton tempButton = new BoardButton(y, x, "");
 
-			tempButton.setFont(new Font("Impact", Font.PLAIN, 22));
-			AllRoom.add(tempButton);
-
+				tempButton.setFont(new Font("Impact", Font.PLAIN, 22));
+				AllRoom.add(tempButton);
+			}
 		}
 
 		add(AllRoom, BorderLayout.CENTER);
@@ -153,7 +154,6 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("123");
 		BoardButton tempButton = (BoardButton) e.getComponent();
 		PlayerType type = PlayerType.None;
 
@@ -165,28 +165,21 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 			return;
 		} else if (getCurrentPlayerNum() == 1) {
 			tempButton.setText("O");
-			dispCurrentPlayer.setText("Player " + 2);
-			type = PlayerType.P2;
-		} else {
-			tempButton.setText("X");
 			dispCurrentPlayer.setText("Player " + 1);
 			type = PlayerType.P1;
+		} else {
+			tempButton.setText("X");
+			dispCurrentPlayer.setText("Player " + 2);
+			type = PlayerType.P2;
 		}
 		changeTurn();
 
 		int y = tempButton.y;
 		int x = tempButton.x;
 
-		System.out.println("mousePressed :" + y + "," + x + "," + type);
-
 		// 여기까지 알아내기
 		this.process_service.process(new SetStoneCommand(y, x, type, check_service, this.board_repo));
 		PlayerType[][] board = this.get_board_service.get_all();
-		// for (int i = 0; i < SIZE; i++) {
-		// for (int j = 0; j < SIZE; j++) {
-		// // System.out.println(board[i][j]);
-		// }
-		// }
 		PlayerType result = distinct_service.get_winner();
 		if (result == PlayerType.P1 || result == PlayerType.P2) {
 			JOptionPane.showMessageDialog(AllRoom, "플레이어 " + result + " 의 승리입니다.");
