@@ -17,6 +17,7 @@ public class GetGameStateFivewoodService implements IDistinctEndGameService {
 	public PlayerType get_winner() {
 		IGameBoard board = repo.load_board();
 
+		return PlayerType.None;
 	}
 
 	@Override

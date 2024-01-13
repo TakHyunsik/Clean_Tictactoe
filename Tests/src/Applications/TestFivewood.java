@@ -10,7 +10,7 @@ import AppInterfaces.BoardServices.IDistinctEndGameService;
 import AppInterfaces.BoardServices.IGetBoardService;
 import AppInterfaces.CommandService.IProcessCommandService;
 import Commons.PlayerType;
-import Entities.FiveWoodBoard;
+import Entities.FivewoodBoard;
 import Fivewood.GetGameStateFivewoodService;
 import Repository.IBoardRepository;
 import Repository.ICommandRepository;
@@ -27,7 +27,7 @@ class TestFivewood {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		board_repo = new TestBoardStorage(new FiveWoodBoard());
+		board_repo = new TestBoardStorage(new FivewoodBoard());
 		cmd_repo = new TestCommandStorage(null);
 		distinct_service = new GetGameStateFivewoodService(board_repo);
 		process_service = new ProcessCommandService(cmd_repo);

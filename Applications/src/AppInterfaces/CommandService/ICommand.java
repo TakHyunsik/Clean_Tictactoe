@@ -22,4 +22,6 @@ public interface ICommand {
 	 * @return
 	 */
 	public boolean check_executable();
+
+	String ToSting();
 }
