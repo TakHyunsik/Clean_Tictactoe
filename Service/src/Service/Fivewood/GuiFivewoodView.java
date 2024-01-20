@@ -26,8 +26,8 @@ import Entities.FivewoodBoard;
 import Repository.IBoardRepository;
 import Repository.ICommandRepository;
 import Usecases.GetBoardService;
-//import Usecases.ProcessCommandService;
-//import Usecases.SetStoneCommand;
+import Usecases.ProcessCommandService;
+import Usecases.SetStoneCommand;
 
 public class GuiFivewoodView extends JFrame implements MouseListener {
 	IBoardRepository board_repo;
