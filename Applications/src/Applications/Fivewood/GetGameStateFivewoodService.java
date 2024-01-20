@@ -38,6 +38,7 @@ public class GetGameStateFivewoodService implements IDistinctEndGameService {
 						return winner;
 					}
 				}
+				
 			}
 		}
 

@@ -26,6 +26,7 @@ public class FivewoodBoardStorage implements IBoardRepository {
 
 	@Override
 	public void update_board(int y, int x, PlayerType type) {
+		System.out.println(y+","+x+","+type);
 		this.board.set_in_board(y, x, type);
 	}
 

@@ -109,6 +109,7 @@ public class GuiFivewoodView extends JFrame implements MouseListener {
 				isGameEnd = false;
 				for (int i = 0; i < AllRoom.getComponents().length; i++) {
 					((BoardButton) AllRoom.getComponent(i)).setText("");
+					board_repo.update_board(i/SIZE, i%SIZE, PlayerType.None);
 				}
 			}
 		});

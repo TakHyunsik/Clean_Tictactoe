@@ -34,7 +34,7 @@ public class TicTacToeBoard implements IGameBoard {
 	@Override
 	public boolean set_in_board(int y, int x, PlayerType player) {
 		// 둘수 있는지 체크하고 둔다.
-		if (check_setable_in_board(y, x)) {
+		if (check_setable_in_board(y, x, player)) {
 			Board[y][x] = player;
 			return true;
 		}
@@ -42,14 +42,14 @@ public class TicTacToeBoard implements IGameBoard {
 	}
 
 	@Override
-	public boolean check_setable_in_board(int y, int x) {
+	public boolean check_setable_in_board(int y, int x, PlayerType player) {
 		// TODO Auto-generated method stub
 		// size를 넘은 곳
 		if (y < 0 || y >= get_size() || x < 0 || x >= get_size()) {
 			return false;
 		}
 		// 이미 둔 곳
-		if (Board[y][x] != PlayerType.None) {
+		if (Board[y][x] != PlayerType.None && player != PlayerType.None) {
 			return false;
 		}
 		// 전부 성공
